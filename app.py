@@ -68,12 +68,92 @@ st.set_page_config(
 
 # ============================== endrika =============================
 def inject_css() -> None:
-    """Mampiditra ny CSS-n'ny app (couleurs, boutons, cartes)."""
+    """Mampiditra ny CSS ankapobeny sy ny endrika vaovao amin'ny pejy fidirana."""
     try:
         css = CSS_FILE.read_text(encoding="utf-8")
     except OSError:
-        return
-    st.html(f"<style>{css}</style>")
+        css = ""
+
+    login_css = r"""
+    /* Pejy fidirana — carte midadasika, logo lehibe, endrika maoderina */
+    .st-key-login_card {
+        box-sizing: border-box;
+        width: min(100%, 820px);
+        margin: clamp(1rem, 4vh, 3rem) auto 1.25rem;
+        padding: clamp(1.25rem, 3.5vw, 2.75rem);
+        border: 1px solid rgba(28, 61, 102, 0.12);
+        border-radius: 30px;
+        background: linear-gradient(145deg, #ffffff 0%, #f7faff 58%, #eef4ff 100%);
+        box-shadow: 0 24px 70px rgba(11, 37, 69, 0.13);
+    }
+    .st-key-login_brand {
+        text-align: center;
+        padding: 0.35rem 0.75rem 1.6rem;
+    }
+    .st-key-login_brand [data-testid="stImage"] {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto 0.65rem;
+    }
+    .st-key-login_brand [data-testid="stImage"] img {
+        object-fit: contain;
+        filter: drop-shadow(0 8px 18px rgba(11, 37, 69, 0.12));
+    }
+    .st-key-login_brand h1 {
+        text-align: center;
+        color: #0b2545;
+        font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+        line-height: 1.15;
+        letter-spacing: -0.035em;
+        font-weight: 800;
+        margin: 0.35rem 0 0.45rem;
+    }
+    .st-key-login_brand p {
+        color: #5a6b82;
+        font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+        line-height: 1.55;
+    }
+    .st-key-login_body {
+        width: min(100%, 570px);
+        margin: 0 auto;
+    }
+    .st-key-login_body [data-testid="stTextInput"] label {
+        color: #203955;
+        font-weight: 650;
+    }
+    .st-key-login_body [data-testid="stTextInput"] input {
+        min-height: 3.1rem;
+        border-radius: 13px;
+        border-color: #d7e1ee;
+        background: rgba(255, 255, 255, 0.96);
+    }
+    .st-key-login_body button[kind="primary"] {
+        min-height: 3.15rem;
+        border-radius: 13px;
+        font-weight: 750;
+        box-shadow: 0 7px 18px rgba(11, 37, 69, 0.16);
+    }
+    .st-key-login_body [data-testid="stAlert"] {
+        border-radius: 14px;
+    }
+    .st-key-login_foot {
+        margin-top: 1.25rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(28, 61, 102, 0.10);
+        text-align: center;
+    }
+    @media (max-width: 640px) {
+        .st-key-login_card {
+            width: 100%;
+            margin: 0.5rem auto 1rem;
+            padding: 1.1rem 1rem;
+            border-radius: 22px;
+        }
+        .st-key-login_brand { padding-bottom: 1rem; }
+        .st-key-login_brand h1 { font-size: 1.55rem; }
+    }
+    """
+    st.html(f"<style>{css}\n{login_css}</style>")
 
 
 def page_header(title: str, subtitle: str, icon: str) -> None:
@@ -367,26 +447,35 @@ def render_first_run_setup() -> None:
 
 
 def render_login() -> None:
-    """Pejy fidirana (azy no jerena raha tsy voasoratra ny mpampiana)."""
-    left, mid, right = st.columns([1, 1.5, 1])
-    with mid:
-        with st.container(border=True, key="login_card"):
-            with st.container(key="login_brand"):
-                c1, c2, c3 = st.columns([1, 1.7, 1])
-                with c2:
-                    show_logo(132)
-                st.title(APP_NAME)
-                st.markdown(f"<p style='text-align:center;margin:0'>{APP_SUBTITLE}</p>",
-                            unsafe_allow_html=True)
-            with st.container(key="login_body"):
-                if auth.setup_code_needed():
-                    render_first_run_setup()
-                else:
-                    render_login_form()
-                with st.container(key="login_foot"):
-                    st.caption(f"Version {APP_VERSION} · ny angona dia ao amin'ny PC-mpanomefa")
-    st.markdown("")
-    st.caption("Raha tsy mety ny fidirana, mifandraisa amin'ny mpitantana ny app.")
+    """Pejy fidirana — accueil lehibe sy formulaire mazava."""
+    with st.container(key="login_card"):
+        with st.container(key="login_brand"):
+            c1, c2, c3 = st.columns([1, 2, 1])
+            with c2:
+                show_logo(190)
+            st.markdown(
+                "<div style='text-align:center;font-size:.72rem;font-weight:800;"
+                "letter-spacing:.16em;color:#b07b25;margin:.35rem 0 .55rem'>"
+                "ESPACE UTILISATEUR</div>",
+                unsafe_allow_html=True,
+            )
+            st.title(APP_NAME)
+            st.markdown(
+                f"<p style='text-align:center;margin:0'>{APP_SUBTITLE}</p>",
+                unsafe_allow_html=True,
+            )
+        with st.container(key="login_body"):
+            if auth.setup_code_needed():
+                render_first_run_setup()
+            else:
+                render_login_form()
+            with st.container(key="login_foot"):
+                st.caption(f"Version {APP_VERSION} · Connexion sécurisée")
+    st.markdown(
+        "<p style='text-align:center;color:#718096;font-size:.88rem;margin:.8rem 0 1.5rem'>"
+        "Raha tsy mety ny fidirana, mifandraisa amin'ny mpitantana ny app.</p>",
+        unsafe_allow_html=True,
+    )
 
 
 # ============================== sidebar ============================
