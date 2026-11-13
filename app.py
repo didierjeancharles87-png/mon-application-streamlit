@@ -37,7 +37,10 @@ from storage import ASA_FITORINA, FIELDS  # noqa: E402
 
 # ============================== konfig ==============================
 BASE_DIR = Path(__file__).resolve().parent
-LOGO = BASE_DIR / "logo.png.jpg"
+LOGO = BASE_DIR / "logo_ecole_sabbat.png"
+if not LOGO.exists():
+    LOGO = BASE_DIR / "logo.png.jpg"  # ancien logo en secours
+LOGIN_HERO = BASE_DIR / "assets" / "login_hero_ecole_sabbat.png"
 CSS_FILE = BASE_DIR / "assets" / "app.css"
 APP_NAME = "Rapport École du Sabbat"
 APP_SUBTITLE = "Gestion et suivi des rapports hebdomadaires"
@@ -75,82 +78,109 @@ def inject_css() -> None:
         css = ""
 
     login_css = r"""
-    /* Pejy fidirana — carte midadasika, logo lehibe, endrika maoderina */
+    /* Accueil et connexion — bleu marine, or et fond clair */
+    .stApp {
+        background:
+          radial-gradient(circle at 12% 8%, rgba(224, 237, 255, .8), transparent 34%),
+          linear-gradient(135deg, #f6f9ff 0%, #eef4fc 55%, #fbfcff 100%);
+    }
+    .main .block-container {
+        max-width: 1500px;
+        padding-top: clamp(1.2rem, 3vh, 2.4rem);
+        padding-bottom: 2rem;
+    }
+    .st-key-login_hero {
+        padding: 0;
+        overflow: hidden;
+        border-radius: 26px;
+        box-shadow: 0 22px 60px rgba(11, 37, 69, .16);
+        border: 1px solid rgba(255,255,255,.82);
+        background: #0b2545;
+    }
+    .st-key-login_hero [data-testid="stImage"] { margin: 0; }
+    .st-key-login_hero img {
+        display: block;
+        width: 100%;
+        border-radius: 26px;
+        object-fit: cover;
+    }
     .st-key-login_card {
         box-sizing: border-box;
-        width: min(100%, 820px);
-        margin: clamp(1rem, 4vh, 3rem) auto 1.25rem;
-        padding: clamp(1.25rem, 3.5vw, 2.75rem);
-        border: 1px solid rgba(28, 61, 102, 0.12);
-        border-radius: 30px;
-        background: linear-gradient(145deg, #ffffff 0%, #f7faff 58%, #eef4ff 100%);
-        box-shadow: 0 24px 70px rgba(11, 37, 69, 0.13);
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: clamp(1.25rem, 2.5vw, 2.4rem);
+        border: 1px solid rgba(28, 61, 102, .12);
+        border-radius: 26px;
+        background: linear-gradient(150deg, #ffffff 0%, #fbfdff 72%, #f1f6ff 100%);
+        box-shadow: 0 22px 60px rgba(11, 37, 69, .12);
     }
     .st-key-login_brand {
         text-align: center;
-        padding: 0.35rem 0.75rem 1.6rem;
+        padding: .1rem .4rem 1.25rem;
     }
     .st-key-login_brand [data-testid="stImage"] {
         display: flex;
         justify-content: center;
-        margin: 0 auto 0.65rem;
+        margin: 0 auto .45rem;
     }
     .st-key-login_brand [data-testid="stImage"] img {
         object-fit: contain;
-        filter: drop-shadow(0 8px 18px rgba(11, 37, 69, 0.12));
+        filter: drop-shadow(0 7px 14px rgba(11, 37, 69, .12));
     }
     .st-key-login_brand h1 {
         text-align: center;
         color: #0b2545;
-        font-size: clamp(1.65rem, 3.2vw, 2.35rem);
-        line-height: 1.15;
-        letter-spacing: -0.035em;
-        font-weight: 800;
-        margin: 0.35rem 0 0.45rem;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        line-height: 1.12;
+        letter-spacing: -.035em;
+        font-weight: 850;
+        margin: .2rem 0 .4rem;
     }
     .st-key-login_brand p {
         color: #5a6b82;
-        font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+        font-size: 1rem;
         line-height: 1.55;
-    }
-    .st-key-login_body {
-        width: min(100%, 570px);
-        margin: 0 auto;
-    }
-    .st-key-login_body [data-testid="stTextInput"] label {
-        color: #203955;
-        font-weight: 650;
-    }
-    .st-key-login_body [data-testid="stTextInput"] input {
-        min-height: 3.1rem;
-        border-radius: 13px;
-        border-color: #d7e1ee;
-        background: rgba(255, 255, 255, 0.96);
-    }
-    .st-key-login_body button[kind="primary"] {
-        min-height: 3.15rem;
-        border-radius: 13px;
-        font-weight: 750;
-        box-shadow: 0 7px 18px rgba(11, 37, 69, 0.16);
-    }
-    .st-key-login_body [data-testid="stAlert"] {
-        border-radius: 14px;
-    }
-    .st-key-login_foot {
-        margin-top: 1.25rem;
-        padding-top: 0.8rem;
-        border-top: 1px solid rgba(28, 61, 102, 0.10);
         text-align: center;
     }
-    @media (max-width: 640px) {
-        .st-key-login_card {
-            width: 100%;
-            margin: 0.5rem auto 1rem;
-            padding: 1.1rem 1rem;
-            border-radius: 22px;
-        }
-        .st-key-login_brand { padding-bottom: 1rem; }
-        .st-key-login_brand h1 { font-size: 1.55rem; }
+    .st-key-login_body { width: 100%; margin: 0 auto; }
+    .st-key-login_body [data-testid="stTextInput"] label {
+        color: #203955;
+        font-weight: 700;
+    }
+    .st-key-login_body [data-testid="stTextInput"] input {
+        min-height: 3.2rem;
+        border-radius: 13px;
+        border-color: #d7e1ee;
+        background: rgba(255,255,255,.98);
+    }
+    .st-key-login_body button[kind="primary"] {
+        min-height: 3.2rem;
+        border-radius: 13px;
+        font-weight: 800;
+        box-shadow: 0 7px 18px rgba(11, 37, 69, .16);
+        background: linear-gradient(100deg, #0b3675, #1456a5);
+    }
+    .st-key-login_body [data-testid="stAlert"] { border-radius: 14px; }
+    .st-key-login_foot {
+        margin-top: 1.15rem;
+        padding-top: .85rem;
+        border-top: 1px solid rgba(28, 61, 102, .10);
+        text-align: center;
+    }
+    .login-bottom-note {
+        text-align: center;
+        color: #62748b;
+        font-size: .88rem;
+        padding: .9rem .5rem 0;
+    }
+    @media (max-width: 760px) {
+        .main .block-container { padding: 1rem .75rem 1.5rem; }
+        .st-key-login_hero { border-radius: 20px; }
+        .st-key-login_hero img { border-radius: 20px; max-height: 360px; object-fit: cover; }
+        .st-key-login_card { padding: 1.2rem 1rem; border-radius: 20px; }
+        .st-key-login_brand { padding-bottom: .8rem; }
+        .st-key-login_brand h1 { font-size: 1.75rem; }
     }
     """
     st.html(f"<style>{css}\n{login_css}</style>")
@@ -447,33 +477,46 @@ def render_first_run_setup() -> None:
 
 
 def render_login() -> None:
-    """Pejy fidirana — accueil lehibe sy formulaire mazava."""
-    with st.container(key="login_card"):
-        with st.container(key="login_brand"):
-            c1, c2, c3 = st.columns([1, 2, 1])
-            with c2:
-                show_logo(190)
-            st.markdown(
-                "<div style='text-align:center;font-size:.72rem;font-weight:800;"
-                "letter-spacing:.16em;color:#b07b25;margin:.35rem 0 .55rem'>"
-                "ESPACE UTILISATEUR</div>",
-                unsafe_allow_html=True,
-            )
-            st.title(APP_NAME)
-            st.markdown(
-                f"<p style='text-align:center;margin:0'>{APP_SUBTITLE}</p>",
-                unsafe_allow_html=True,
-            )
-        with st.container(key="login_body"):
-            if auth.setup_code_needed():
-                render_first_run_setup()
+    """Pejy fidirana: sary famantarana lehibe sy formulaire tena izy."""
+    left, right = st.columns([1.08, 0.92])
+
+    with left:
+        with st.container(key="login_hero"):
+            if LOGIN_HERO.exists():
+                st.image(str(LOGIN_HERO), use_container_width=True)
             else:
-                render_login_form()
-            with st.container(key="login_foot"):
-                st.caption(f"Version {APP_VERSION} · Connexion sécurisée")
+                show_logo(180)
+                st.title("École du Sabbat")
+                st.caption("Apprendre · Partager · Grandir")
+
+    with right:
+        with st.container(border=True, key="login_card"):
+            with st.container(key="login_brand"):
+                c1, c2, c3 = st.columns([1, 1.35, 1])
+                with c2:
+                    show_logo(112)
+                st.markdown(
+                    "<div style='text-align:center;font-size:.72rem;font-weight:800;"
+                    "letter-spacing:.16em;color:#b07b25;margin:.2rem 0 .45rem'>"
+                    "ESPACE UTILISATEUR</div>",
+                    unsafe_allow_html=True,
+                )
+                st.title("Tongasoa !")
+                st.markdown(
+                    "<p style='margin:0'>Rapport École du Sabbat · Midira amin'ny kaontinao</p>",
+                    unsafe_allow_html=True,
+                )
+            with st.container(key="login_body"):
+                if auth.setup_code_needed():
+                    render_first_run_setup()
+                else:
+                    render_login_form()
+                with st.container(key="login_foot"):
+                    st.caption(f"Version {APP_VERSION} · Connexion sécurisée")
+
     st.markdown(
-        "<p style='text-align:center;color:#718096;font-size:.88rem;margin:.8rem 0 1.5rem'>"
-        "Raha tsy mety ny fidirana, mifandraisa amin'ny mpitantana ny app.</p>",
+        "<div class='login-bottom-note'>Apprendre · Partager · Grandir &nbsp;•&nbsp; "
+        "Ensemble dans la foi et le service</div>",
         unsafe_allow_html=True,
     )
 
