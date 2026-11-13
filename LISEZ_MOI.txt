@@ -1,0 +1,73 @@
+========================================================================
+ RAPPORT ÉCOLE DU SABBAT — APP LOCAL (Streamlit) — version 2.0
+ Dossier: D:\Projet App Ecole du sabbat\Rapport ecole du sabbta
+=======================================================================
+ 👉 Jereo ny README.md (manana ny antsipiriany rehetra)
+
+ETAPA 1 — Fandefasana ny app
+    cd /d "D:\Projet App Ecole du sabbat\Rapport ecole du sabbta"
+    venv\Scripts\streamlit run app.py
+    → http://localhost:8501
+
+ETAPA 2 — Ny voalohany fandefasana: amorona ny administrateur
+    Ao amin'ny TERMINAL-n'ny serveur dia hiseho ny CODE FANOMBOHANA
+    (raha tsy hita dia jereo ny rakitra: data\setup_code.txt)
+    Ampidiro ao amin'ny pejy fidirana ny code + ny anaran'ny
+    administrateur + ny password-nao (manokana!).
+
+ETAPA 3 — Fividirana
+    http://localhost:8501 → andrano ny anaran'ny mpampiana sy ny password.
+    Bouton "Fivoahana" ao amin'ny sisiny = hivoaka.
+    ⚠ Rechargement-n'ny pejy (F5) = session vaovao → mila miditra indray.
+
+ETAPA 4 — Ho an'ny mpampiana hafa (command line)
+    venv\Scripts\python manage_users.py add mpampianatra1 --role editeur
+    venv\Scripts\python manage_users.py passwd admin
+    venv\Scripts\python manage_users.py list
+    (roles: admin / editeur / lecteur)
+
+ETAPA 5 — Fanamarinana ny app
+    venv\Scripts\python test_app.py
+    (miasa amin'ny angona tampon — ny angona velona dia tsy miova)
+
+ETAPA 6 — LAN (telefona na PC hafa ao amin'ny Wi-Fi)
+    venv\Scripts\streamlit run app.py --server.address 0.0.0.0 --server.port 8501
+    Avia amin'ny "Network URL" ao amin'ny terminal.
+    ⚠ Ny Windows Firewall: alefa amin'ny "réseau privé" ihany (jereo ny
+      README.md, andao ny commande netsh/New-NetFirewallRule).
+
+------------------------------------------------------------------------
+MENY (pejy 7)
+------------------------------------------------------------------------
+    🏫 Classe            → ampio/mamafa ny classe + mpampianatra
+    📝 Fampidirana Sabata → ampidiro ny angona isaky ny Sabata
+    📄 Rapport classe     → tatitra isaky ny classe
+    📊 Totaly & Top 3     → fitambarana + Top 3 + sary
+    📤 Fanondranana      → export PDF + PowerPoint
+    🗂️ Angona             → manova/mamama ny angona + CSV
+    🛠️ Administration     → sauvegardes + mpampiana + momba ny app
+
+------------------------------------------------------------------------
+SAUVEGARDES ("backups")
+------------------------------------------------------------------------
+    backups\backup_AAAAAMMJJ_HHMMSS_ny_karazana\
+        ├── sabata.csv
+        ├── classes.json
+        └── manifest.json
+    • isam-bolana automatika (rehefa manomboka ny app)
+    • alohan'ny fanovana zava-dehibe (fampidirana angona, classe…)
+    • manuel: Administration → "💾 Sauvegardes"
+    • Azo alaina (ZIP) sy azo averina (misy fanamarinana fomba)
+    • TSY fafana mihitsy mba ho an'ny app
+
+------------------------------------------------------------------------
+ANGONA
+------------------------------------------------------------------------
+    data\sabata.csv       → angona isaky ny Sabata
+    data\classes.json     → classe + mpampianatra + isa voasoratra
+    data\users.json       → mpampiana + hash (PBKDF2, tsy misy en clair)
+    data\*.bak            → copie de sécurité
+    data\sad.db, secret.key → rakitra taloha (tsy ampiasaina ny app 2.0)
+
+    💾 Kopia ny dossier "data" sy "backups" isaky ny herinandro
+       (USB na Google Drive) — ny backup ao amin'ny PC ihany dia tsy ampy.
