@@ -1,0 +1,255 @@
+/* =========================================================================
+   Rapport École du Sabbat — feuille de style (UI)
+   Chargée avec st.html(). Les couleurs d'accent utilisent
+   var(--primary-color) : elle suit automatiquement le mode clair/sombre.
+   ========================================================================= */
+
+/* ------------------------------------------------------------- SIDEBAR -- */
+.st-key-sidebar_brand img {
+    border-radius: 14px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+}
+.st-key-sidebar_brand p {
+    font-weight: 700;
+    letter-spacing: .2px;
+    margin-bottom: 0;
+}
+.st-key-sidebar_brand small {
+    opacity: .75;
+}
+
+/* Liens du menu latéral */
+.st-key-nav_menu a {
+    border-radius: 9px;
+    padding: .42rem .6rem;
+    margin-bottom: .12rem;
+    font-weight: 600;
+    transition: background .15s ease, transform .12s ease;
+}
+.st-key-nav_menu a:hover {
+    background: rgba(255, 255, 255, .10);
+    transform: translateX(2px);
+}
+.st-key-nav_menu a[aria-current="page"] {
+    background: var(--primary-color);
+    color: #16202E !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .28);
+}
+
+/* Carte utilisateur + déconnexion */
+.st-key-user_card {
+    border-radius: 10px;
+    padding: .55rem .7rem;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .14);
+}
+.st-key-user_card strong {
+    display: block;
+    font-size: .95rem;
+}
+.st-key-user_card small {
+    opacity: .8;
+}
+
+/* ---------------------------------------------------------- ENTÊTES ----- */
+.st-key-page_header {
+    border-left: 5px solid var(--primary-color);
+    border-radius: 6px;
+    padding: .35rem .1rem .35rem .85rem;
+    margin-bottom: .6rem;
+}
+.st-key-page_header h1 {
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+.st-key-page_header p {
+    opacity: .78;
+    margin-top: -.3rem;
+}
+
+/* ------------------------------------------------------------ BOUTONS --- */
+.st-key-btn_gold button,
+.st-key-btn_add button,
+.st-key-btn_save button,
+.st-key-btn_login button,
+.st-key-btn_export button {
+    background: linear-gradient(135deg, #C28A2B, #E0B44A);
+    color: #16202E;
+    font-weight: 700;
+    border: none;
+    box-shadow: 0 2px 10px rgba(194, 138, 43, .38);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.st-key-btn_gold button:hover,
+.st-key-btn_add button:hover,
+.st-key-btn_save button:hover,
+.st-key-btn_login button:hover,
+.st-key-btn_export button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(194, 138, 43, .48);
+    color: #16202E;
+    border: none;
+}
+
+.st-key-btn_navy button {
+    background: linear-gradient(135deg, #0B2545, #1B3F6E);
+    color: #FFFFFF;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 2px 10px rgba(11, 37, 69, .35);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.st-key-btn_navy button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(11, 37, 69, .45);
+    color: #FFFFFF;
+    border: none;
+}
+
+.st-key-btn_danger button {
+    background: #B42318;
+    color: #FFFFFF;
+    font-weight: 600;
+    border: none;
+}
+.st-key-btn_danger button:hover {
+    background: #8F1D14;
+    color: #FFFFFF;
+    border: none;
+}
+
+.st-key-btn_ghost button {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.st-key-btn_ghost button:hover {
+    background: rgba(194, 138, 43, .12);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+/* Bouton de déconnexion (fond sombre) */
+.st-key-btn_logout button {
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .22);
+    color: inherit;
+    font-weight: 600;
+}
+.st-key-btn_logout button:hover {
+    background: #B42318;
+    border-color: #B42318;
+    color: #FFFFFF;
+}
+
+/* ---------------------------------------------------------- CARTES KPI -- */
+.st-key-kpi {
+    border-radius: 10px;
+    padding: .75rem .9rem;
+    border-top: 3px solid var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+}
+.st-key-kpi label {
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    opacity: .7;
+    font-weight: 700;
+}
+.st-key-kpi [data-testid="stMetricValue"] {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+/* --------------------------------------------------------- PODIUM TOP 3 - */
+.st-key-podium {
+    border-radius: 12px;
+    padding: .9rem .8rem;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, .10);
+}
+.st-key-podium_1 {
+    border-top: 5px solid #C28A2B;
+    background: linear-gradient(180deg, rgba(194, 138, 43, .14), transparent);
+}
+.st-key-podium_2 {
+    border-top: 5px solid #9AA7B4;
+    background: linear-gradient(180deg, rgba(154, 167, 180, .14), transparent);
+}
+.st-key-podium_3 {
+    border-top: 5px solid #B07A4A;
+    background: linear-gradient(180deg, rgba(176, 122, 74, .14), transparent);
+}
+.st-key-podium h4 {
+    margin: .2rem 0 0;
+    font-weight: 700;
+}
+.st-key-podium b {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* ------------------------------------------------------ PAGE DE LOGIN --- */
+.st-key-login_card {
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 14px !important;
+    box-shadow: 0 14px 40px rgba(11, 37, 69, .18);
+}
+.st-key-login_brand {
+    background: linear-gradient(135deg, #0B2545 0%, #1B3F6E 70%, #274B7F 100%);
+    padding: 1.4rem 1rem 1.2rem;
+    text-align: center;
+    border-radius: 13px 13px 0 0;
+}
+.st-key-login_brand img {
+    border-radius: 16px;
+    border: 3px solid #D9AF4A;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .40);
+}
+.st-key-login_brand h1 {
+    color: #FFFFFF;
+    font-weight: 800;
+    margin: .5rem 0 .1rem;
+    letter-spacing: -.5px;
+}
+.st-key-login_brand p {
+    color: #C9D8EE;
+    margin: 0;
+}
+.st-key-login_body {
+    padding: 1.1rem 1.1rem 1.3rem;
+}
+.st-key-login_foot {
+    text-align: center;
+    opacity: .65;
+    margin-top: .4rem;
+}
+
+/* ------------------------------------------------------- ONGLETS / TABS -- */
+.st-key-tabs_admin button[data-baseweb="tab"] {
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------- DIVERS -------- */
+.st-key-note_box {
+    border-left: 4px solid var(--primary-color);
+    border-radius: 6px;
+    padding: .55rem .8rem;
+    background: rgba(194, 138, 43, .08);
+}
+
+[data-testid="stMetricDelta"] {
+    font-weight: 700;
+}
+
+/* Champs de formulaire : coins arrondis + focus doré */
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-testid="stDateInput"] input,
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    border-radius: 9px;
+}

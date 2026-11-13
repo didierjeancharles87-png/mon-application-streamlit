@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environnement virtuel
+venv/
+.venv/
+
+# Données sensibles
+data/
+*.db
+*.sqlite
+*.sqlite3
+secret.key
+
+# Sauvegardes
+backups/
+
+# Configuration secrète Streamlit
+.streamlit/secrets.toml
